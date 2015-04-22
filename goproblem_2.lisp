@@ -8,30 +8,23 @@
 (defparameter *board* (make-array (list (+ *n* 2) (+ *n* 2)) :initial-element 0))
 
 ;; Generate random coordinates
-;;(let (x (+ 1 (random (- n 1)))) (do stuff with x)) ; I'm better off using a function instead
-(defun random_coordinate (*n*)
-  (+ 1 (random *n*)))   ; Remember to call the function like so: (random_coordinate n)
+(defun random-coordinate ()
+  (+ 1 (random *n*)))   
 
-;; Define x_coordinate and y_coordinate in terms of (random n)
-(defparameter *x-coordinate* (random-coordinate *n*))
-(defparameter *y-coordinate* (random-coordinate *n*))
+;; Define x-coordinate and y-coordinate using (random-coordinate)
+(defparameter *x-coordinate* (random-coordinate))
+(defparameter *y-coordinate* (random-coordinate))
 
 ;; Define a boolean function that checks whether there are adjascent stones
 (defun mth (b i j)
   (nth (nth b i) j))
 
-(defun dec (*n*)
-  (- *n* 1))
-
-(defun inc (*n*)
-  (+ *n* 1))
-
 (defun check-if-adjascent (x-coordinate y-coordinate)
        (not (or
-	    (= 1 (mth *board* (dec *x-coordinate*) *y-coordinate*))
-	    (= 1 (mth *board* *x-coordinate* (dec *y-coordinate*)))
-	    (= 1 (mth *board* (inc *x-coordinate*) *y-coordinate*))
-	    (= 1 (mth *board* *x-coordinate* (inc *y-coordinate*))))))
+	    (= 1 (mth *board* (decf *x-coordinate*) *y-coordinate*))
+	    (= 1 (mth *board* *x-coordinate* (decf *y-coordinate*)))
+	    (= 1 (mth *board* (incf *x-coordinate*) *y-coordinate*))
+	    (= 1 (mth *board* *x-coordinate* (incf *y-coordinate*))))))
 ;; Define a boolean function that checks whether there's already a stone placed there
 (defun already-a-stone ()
   (not (= 1 (mth *board* *x-coordinate* *y-coordinate*))))
