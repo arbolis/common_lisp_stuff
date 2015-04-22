@@ -19,7 +19,7 @@
 (defun mth (b i j)
   (nth (nth b i) j))
 
-(defun check-if-adjascent (x-coordinate y-coordinate)
+(defun check-if-adjascent ()
        (not (or
 	    (= 1 (mth *board* (decf *x-coordinate*) *y-coordinate*))
 	    (= 1 (mth *board* *x-coordinate* (decf *y-coordinate*)))
@@ -30,7 +30,7 @@
   (not (= 1 (mth *board* *x-coordinate* *y-coordinate*))))
 
 ;; Now the serious and hardest part
-;;if check_if_adjascent returns false and there is no stone at x_coordinate y_coordinate, then
+;;if check-if-adjascent returns false and there is no stone at x_coordinate y_coordinate, then
 ;;add a new stone (see below) and increase the counter by 1.
 ;;else if there is a stone at x_coordinate y_coordinate, pick a new x_coordinate y_coordinate
 ;;else increase the counter and return "'(It took) counter '(stones)".
